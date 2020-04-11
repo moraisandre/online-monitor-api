@@ -24,9 +24,6 @@ app.post(`${API_VERSION}/ping`, (req, res) => {
   const IPIsValid = schemaIP.valid().validate(req.body).error;
   const urlIsValid = schemaURI.valid().validate(req.body).error;
 
-  log.info(IPIsValid);
-  log.info(urlIsValid);
-
   if(IPIsValid && urlIsValid) {
     if (IPIsValid) {
       return res.status(400).send(schemaIP.valid().validate(req.body).error.details[0].message);
