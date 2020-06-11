@@ -16,6 +16,7 @@
     "is-reachable": "^4.0.0",
     "ping": "^0.2.3",
     "request": "^2.88.2",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
   }
 }
