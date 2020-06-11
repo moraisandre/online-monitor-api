@@ -3,6 +3,7 @@ const log = require('./util/logger');
 const { port } = require('./config');
 var ping = require('ping');
 const isReachable = require('is-reachable');
+var request = require('request');
 
 const app = express();
 
@@ -41,6 +42,24 @@ app.post(`${API_VERSION}/ping`, (req, res) => {
 
     });
   })();
+
+});
+
+app.post(`${API_VERSION}/api`, (req, res) => {  
+
+  request({
+    url: req.body.url,
+    method: "POST",
+    json: true,
+    body: req.body.body
+  }, function (error, response, body){
+    if (!error && response.statusCode == 200) {
+      log.info('api ' + req.body.url + ' is up');
+      return res.status(200).send(true);
+    }
+    log.error('api ' + req.body.url + ' is not responding properly');
+    return res.status(200).send(false);
+});
 
 });
 
